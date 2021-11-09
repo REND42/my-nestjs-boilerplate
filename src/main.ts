@@ -29,7 +29,6 @@ async function bootstrap() {
   const port = process.env.PORT || 3000
   app.use(cookieParser())
   await app.listen(port, () => {
-    console.log(22, process.env.DB_PASSWORD)
     Logger.log(`Running in ${config.get('environment')}, port: ${port}`)
   })
 }

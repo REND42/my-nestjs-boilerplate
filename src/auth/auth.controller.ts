@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, Post, Req, Request, Res, UseGuards } from '@nestjs/common';
-import { ApiBody, ApiCookieAuth, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiBody, ApiCookieAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express'
 import { AuthService } from './auth.service';
 import LoginDto from './dto/login.dto';
@@ -8,6 +8,7 @@ import JwtAuthGuard from './guards/jwt-auth.guard';
 import LocalAuthGuard from './guards/local-auth.guard';
 import RequestWithUser from './interface/requestWithUser.interface';
 
+@ApiTags('权限')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {

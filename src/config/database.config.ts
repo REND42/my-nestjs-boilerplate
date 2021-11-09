@@ -1,4 +1,5 @@
 import { registerAs } from "@nestjs/config";
+import Post from "src/posts/post.entity";
 import { User } from "src/users/user.entity";
 
 const defaultOptions = {
@@ -36,7 +37,7 @@ export const postgresConfig = registerAs('postgres', () => ({
   synchronize: process.env.PG_SYNCHRONIZE || false,
   entities: [
     // "dist/users/*.entity{.ts,.js}"
-    User
+    User, Post
   ],
   ...defaultOptions
 }))

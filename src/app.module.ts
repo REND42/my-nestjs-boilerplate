@@ -10,6 +10,7 @@ import AppConfig from './config/app.config';
 import { mysqlConfig, postgresConfig } from "./config/database.config";
 import { validationSchema } from './config/validation';
 import { AuthModule } from './auth/auth.module';
+import { PostsModule } from './posts/posts.module';
 
 
 @Module({
@@ -34,7 +35,8 @@ import { AuthModule } from './auth/auth.module';
       inject: [ ConfigService ]
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    PostsModule
   ],
   controllers: [AppController],
   providers: [AppService]

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Req, Request, Res, UseGuards } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, HttpCode, Post, Req, Request, Res, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiBody, ApiCookieAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express'
 import { AuthService } from './auth.service';
@@ -10,6 +10,10 @@ import RequestWithUser from './interface/requestWithUser.interface';
 
 @ApiTags('权限')
 @Controller('auth')
+// @UseInterceptors(ClassSerializerInterceptor)
+@SerializeOptions({
+  strategy: 'excludeAll'
+})
 export class AuthController {
   constructor(private readonly authService: AuthService) {
 
@@ -31,14 +35,18 @@ export class AuthController {
   @ApiOkResponse({
     description: 'result token'
   })
-  login(@Request() req: RequestWithUser, @Res() res: Response) {
-    const user = req.user
+  async login(@Req() request: RequestWithUser) {
+    const { user } = request
     const cookie = this.authService.getCookieWithJwtToken(user.id)
-    res.setHeader('Set-Cookie', cookie)
-    
-    user.password = undefined
-    return res.send(user)
+    request.res.setHeader('Set-Cookie', cookie)
+    return user
   }
+  // login(@Request() req: RequestWithUser, @Res() res: Response) {
+  //   const user = req.user
+  //   const cookie = this.authService.getCookieWithJwtToken(user.id)
+  //   res.setHeader('Set-Cookie', cookie)
+  //   return res.send(user)
+  // }
 
   @ApiCookieAuth()
   @UseGuards(JwtAuthGuard)

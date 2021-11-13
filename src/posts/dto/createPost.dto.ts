@@ -14,4 +14,11 @@ export default class CreatePostDto {
     required: true
   })
   content: string
+
+  @ApiProperty({
+    description: '分类',
+    type: String,
+    required: false
+  })
+  category: string
 }

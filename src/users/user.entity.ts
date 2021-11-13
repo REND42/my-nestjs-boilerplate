@@ -1,18 +1,22 @@
+import { Exclude, Expose } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id?: number;
 
   @Column()
-  username: string;
+  @Expose()
+  public username: string;
 
   @Column({ unique: true })
-  email: string;
+  @Expose()
+  public email: string;
 
   @Column()
-  password: string;
+  @Exclude()
+  public password: string;
 
   // @Column({ default: true })
   // active: boolean;

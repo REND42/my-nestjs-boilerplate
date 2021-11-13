@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, SerializeOptions, UseGuards } from '@nestjs/common';
 import { ApiCookieAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import JwtAuthGuard from 'src/auth/guards/jwt-auth.guard';
 import FindOneParams from 'src/utils/findOneParams';
@@ -8,6 +8,9 @@ import { PostsService } from './posts.service';
 
 @ApiTags("文章")
 @Controller('posts')
+@SerializeOptions({
+  strategy: 'exposeAll'
+})
 export class PostsController {
 
   constructor(

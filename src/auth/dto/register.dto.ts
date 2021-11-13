@@ -1,5 +1,29 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator"
+import Address from "src/users/address.entity"
+
+class AddressDto {
+  @ApiProperty({
+    description: '街道',
+    type: String,
+    required: false
+  })
+  street: string
+
+  @ApiProperty({
+    description: '城市',
+    type: String,
+    required: false
+  })
+  city: string
+
+  @ApiProperty({
+    description: '国家',
+    type: String,
+    required: false
+  })
+  country: string
+}
 
 export default class RegisterDto {
   @ApiProperty({
@@ -28,5 +52,12 @@ export default class RegisterDto {
   @IsNotEmpty()
   @MinLength(3)
   password: string
+
+  @ApiProperty({
+    description: '地址',
+    type: () => AddressDto,
+    required: false
+  })
+  address: Address
 
 }

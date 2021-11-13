@@ -1,22 +1,36 @@
 import { Exclude, Expose } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import Post from 'src/posts/post.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import Address from './address.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
+  @Exclude()
   public id?: number;
 
   @Column()
   @Expose()
-  public username: string;
+  public username: string
 
   @Column({ unique: true })
   @Expose()
-  public email: string;
+  public email: string
 
   @Column()
   @Exclude()
-  public password: string;
+  public password: string
+
+  @OneToOne(() => Address, {
+    eager: true,
+    cascade: true
+  })
+  @JoinColumn()
+  @Expose()
+  public address: Address
+
+  @OneToMany(() => Post, (post: Post) => post.author)
+  public posts: Post[]
 
   // @Column({ default: true })
   // active: boolean;

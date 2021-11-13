@@ -10,10 +10,10 @@ import RequestWithUser from './interface/requestWithUser.interface';
 
 @ApiTags('权限')
 @Controller('auth')
-// @UseInterceptors(ClassSerializerInterceptor)
-@SerializeOptions({
-  strategy: 'excludeAll'
-})
+@UseInterceptors(ClassSerializerInterceptor)
+// @SerializeOptions({
+//   strategy: 'excludeAll'
+// })
 export class AuthController {
   constructor(private readonly authService: AuthService) {
 

@@ -1,4 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger"
+import { IsNotEmpty, IsString } from "class-validator"
+import Category from "src/categories/categories.entity"
+
+class CategoriesDto {
+  @ApiProperty({
+    description: '分类id',
+    type: Number,
+    required: true
+  })
+  id: number
+}
 
 export default class CreatePostDto {
   @ApiProperty({
@@ -6,6 +17,8 @@ export default class CreatePostDto {
     type: String,
     required: true
   })
+  @IsString()
+  @IsNotEmpty()
   title: string
 
   @ApiProperty({
@@ -13,12 +26,15 @@ export default class CreatePostDto {
     type: String,
     required: true
   })
+  @IsString()
+  @IsNotEmpty()
   content: string
 
   @ApiProperty({
     description: '分类',
-    type: String,
+    // type: () => CategoriesDto,
+    type: [CategoriesDto],
     required: false
   })
-  category: string
+  categories: CategoriesDto[]
 }

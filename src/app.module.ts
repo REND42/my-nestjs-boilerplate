@@ -11,6 +11,7 @@ import { mysqlConfig, postgresConfig } from "./config/database.config";
 import { validationSchema } from './config/validation';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
+import { CategoriesModule } from './categories/categories.module';
 
 
 @Module({
@@ -36,7 +37,8 @@ import { PostsModule } from './posts/posts.module';
     }),
     UsersModule,
     AuthModule,
-    PostsModule
+    PostsModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService]

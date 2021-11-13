@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, SerializeOptions, UseGuards } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, Req, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiCookieAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import JwtAuthGuard from 'src/auth/guards/jwt-auth.guard';
+import RequestWithUser from 'src/auth/interface/requestWithUser.interface';
 import FindOneParams from 'src/utils/findOneParams';
 import CreatePostDto from './dto/createPost.dto';
 import UpdatePostDto from './dto/updatePost.dto';
@@ -8,9 +9,10 @@ import { PostsService } from './posts.service';
 
 @ApiTags("文章")
 @Controller('posts')
-@SerializeOptions({
-  strategy: 'exposeAll'
-})
+@UseInterceptors(ClassSerializerInterceptor)
+// @SerializeOptions({
+//   strategy: 'exposeAll'
+// })
 export class PostsController {
 
   constructor(
@@ -37,8 +39,8 @@ export class PostsController {
   @ApiOperation({description: '新建文章'})
   @ApiCookieAuth()
   @UseGuards(JwtAuthGuard)
-  async createPost(@Body() post: CreatePostDto) {
-    return this.postsService.createPost(post)
+  async createPost(@Body() post: CreatePostDto, @Req() req: RequestWithUser) {
+    return this.postsService.createPost(post, req.user)
   }
 
   @Put(':id')
@@ -50,6 +52,7 @@ export class PostsController {
   }
 
   @Delete(':id')
+  @ApiOperation({description: '删除文章'})
   @ApiCookieAuth()
   @UseGuards(JwtAuthGuard)
   async deletePost(@Param('id') id: string) {

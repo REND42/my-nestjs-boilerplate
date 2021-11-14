@@ -6,7 +6,7 @@ import Address from './address.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  @Exclude()
+  @Expose()
   public id?: number;
 
   @Column()
@@ -27,10 +27,10 @@ export class User {
   })
   @JoinColumn()
   @Expose()
-  public address: Address
+  public address?: Address
 
   @OneToMany(() => Post, (post: Post) => post.author)
-  public posts: Post[]
+  public posts?: Post[]
 
   // @Column({ default: true })
   // active: boolean;

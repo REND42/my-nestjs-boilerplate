@@ -21,27 +21,6 @@ describe('The AuthService', () => {
 
   beforeEach( async () => {
     const module = await Test.createTestingModule({
-      // imports: [
-      //   // ConfigModule.forRoot({
-      //   //   isGlobal: true,
-      //   //   load: [
-      //   //     mysqlConfig, postgresConfig
-      //   //   ],
-      //   //   validationSchema
-      //   // }),
-
-      //   // // TypeOrmModule.forRootAsync({
-      //   // //   name: 'project2',
-      //   // //   imports: [ ConfigModule ],
-      //   // //   useFactory: (configService: ConfigService) => configService.get<ConnectionOptions>('postgres'),
-      //   // //   inject: [ ConfigService ]
-      //   // // }),
-      //   // UsersModule,
-      //   // AuthModule,
-      //   // PostsModule,
-      //   // CategoriesModule
-      // ],
-
       providers: [
         UsersService,
         AuthService,
@@ -61,7 +40,6 @@ describe('The AuthService', () => {
     }).compile()
 
     authService = await module.get<AuthService>(AuthService)
-
   })
 
   describe('when creating a cookie', () => {

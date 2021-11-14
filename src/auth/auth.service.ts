@@ -23,8 +23,8 @@ export class AuthService {
         ...registrationData,
         password: hashedPassword
       })
-      // createdUser.password = undefined
-      console.log(2233, createdUser)
+      createdUser.password = undefined
+      // console.log(2233, createdUser)
       return createdUser
     } catch (error) {
       if(error?.code === PGErrorCode.UniqueViolation) {

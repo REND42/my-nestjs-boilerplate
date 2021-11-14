@@ -1,8 +1,8 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, Req, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiCookieAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
-import JwtAuthGuard from 'src/auth/guards/jwt-auth.guard';
-import RequestWithUser from 'src/auth/interface/requestWithUser.interface';
-import FindOneParams from 'src/utils/findOneParams';
+import JwtAuthGuard from '../auth/guards/jwt-auth.guard';
+import RequestWithUser from '../auth/interface/requestWithUser.interface';
+import FindOneParams from '../utils/findOneParams';
 import CreatePostDto from './dto/createPost.dto';
 import UpdatePostDto from './dto/updatePost.dto';
 import { PostsService } from './posts.service';

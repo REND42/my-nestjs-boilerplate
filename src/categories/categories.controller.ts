@@ -1,7 +1,7 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Patch, Post, UseGuards, UseInterceptors } from "@nestjs/common";
 import { ApiCookieAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
-import JwtAuthGuard from "src/auth/guards/jwt-auth.guard";
-import FindOneParams from "src/utils/findOneParams";
+import JwtAuthGuard from "../auth/guards/jwt-auth.guard";
+import FindOneParams from "../utils/findOneParams";
 import CategoriesService from "./categories.service";
 import CreateCategoryDto from "./dto/createCategory.dto";
 import UpdateCategoryDto from "./dto/updateCategory.dto";

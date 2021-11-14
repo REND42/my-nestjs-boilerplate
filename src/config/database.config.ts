@@ -1,8 +1,8 @@
 import { registerAs } from "@nestjs/config";
-import Category from "src/categories/categories.entity";
-import Post from "src/posts/post.entity";
-import Address from "src/users/address.entity";
-import { User } from "src/users/user.entity";
+import Category from "../categories/categories.entity";
+import Post from "../posts/post.entity";
+import Address from "../users/address.entity";
+import { User } from "../users/user.entity";
 
 const defaultOptions = {
 

@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import Post from 'src/posts/post.entity';
+import Post from '../posts/post.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import Address from './address.entity';
 

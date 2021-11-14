@@ -1,6 +1,6 @@
 import { Exclude, Transform } from "class-transformer";
-import Category from "src/categories/categories.entity";
-import { User } from "src/users/user.entity";
+import Category from "../categories/categories.entity";
+import { User } from "../users/user.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

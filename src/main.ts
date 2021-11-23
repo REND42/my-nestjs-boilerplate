@@ -15,6 +15,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ExcludeNullInterceptor())
   app.use(cookieParser())
 
+  app.enableCors()
+
   const swaggerConf = new DocumentBuilder().setTitle('Nest App Example')
     .setDescription('The nest api description')
     .setVersion('1.0.0')

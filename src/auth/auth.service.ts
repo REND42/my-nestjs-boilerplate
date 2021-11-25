@@ -24,7 +24,6 @@ export class AuthService {
         password: hashedPassword
       })
       createdUser.password = undefined
-      // console.log(2233, createdUser)
       return createdUser
     } catch (error) {
       if(error?.code === PGErrorCode.UniqueViolation) {
@@ -34,24 +33,42 @@ export class AuthService {
     }
   }
 
-  public getCookieWithJwtToken(userId: number) {
-    const payload: TokenPayload = { userId }
+  public login(user) {
+    const payload: TokenPayload = user
     const token = this.jwtService.sign(payload)
-    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get('JWT_EXPIRATION_TIME')}`
+    return { access_token: token }
   }
 
-  public getCookieForLogout() {
-    return `Authentication=; HttpOnly; Path=/; Max-Age=0`
+  public getUserInfoByToken(token: string) {
+    const userId = this.jwtService.decode(token)
+    console.log(1111, userId)
+
+    // const user = this.usersService.findById(userId)
+    return null
   }
+
+  // public getCookieWithJwtToken(userId: number) {
+  //   const payload: TokenPayload = { userId }
+  //   const token = this.jwtService.sign(payload)
+  //   return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get('JWT_EXPIRATION_TIME')}`
+  // }
+
+  // public getCookieForLogout() {
+  //   return `Authentication=; HttpOnly; Path=/; Max-Age=0`
+  // }
 
   public async getAuthenticatedUser(email: string, password: string) {
     try {
       const user = await this.usersService.findByEmail(email)
       await this.verifyPassword(password, user.password)
-      user.password = undefined
-      return user
+      delete user.password
+      return {
+        id: user.id,
+        username: user.username,
+        email: user.email
+       }
     } catch (error) {
-      throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST)
+      throw new HttpException('权限认证失败', HttpStatus.BAD_REQUEST)
     }
   }
 

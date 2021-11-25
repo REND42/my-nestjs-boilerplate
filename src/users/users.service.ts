@@ -28,11 +28,11 @@ export class UsersService {
   }
 
   async findById(id: number) {
-    const user = await this.usersRepository.findOne({id})
+    const user = await this.usersRepository.findOne({ id })
     if(user) {
       return user
     }
-    throw new HttpException('User with this id does not exist', HttpStatus.NOT_FOUND)
+    throw new HttpException('未找到此id的用户', HttpStatus.NOT_FOUND)
   }
 
 

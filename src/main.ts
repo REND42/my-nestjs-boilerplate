@@ -20,14 +20,25 @@ async function bootstrap() {
   const swaggerConf = new DocumentBuilder().setTitle('Nest App Example')
     .setDescription('The nest api description')
     .setVersion('1.0.0')
+    .addBearerAuth({
+      type: 'http', scheme: 'bearer', bearerFormat: 'JWT'
+    }, 'Authorization')
+
     // .addBearerAuth({
-    //   type: 'http', scheme: 'bearer', bearerFormat: 'Token'
-    // }, 'access-token')
-    .addCookieAuth('Authentication', {
-      type: 'http',
-      in: 'Header',
-      scheme: 'Bearer'
-    })
+    //   type: 'http',
+    //   scheme: 'bearer',
+    //   bearerFormat: 'JWT',
+    //   name: 'JWT',
+    //   description: 'Enter JWT token',
+    //   in: 'header',
+    // })
+
+
+    // .addCookieAuth('Authentication', {
+    //   type: 'http',
+    //   in: 'Header',
+    //   scheme: 'Bearer'
+    // })
     .addTag('nest app')
     .build()
 

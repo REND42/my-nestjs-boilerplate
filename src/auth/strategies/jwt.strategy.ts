@@ -14,17 +14,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   ) {
     super({
-      // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      // ignoreExpiration: false,
-      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
-        return request?.cookies?.Authentication;
-      }]),
-      secretOrKey: configService.get('JWT_SECRET')
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      // jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
+      //   return request?.cookies?.Authentication;
+      // }]),
+      // secretOrKey: configService.get('JWT_SECRET')
+      secretOrKey: 'TryNest'
     })
   }
 
   async validate(payload: TokenPayload) {
-    return this.userService.findById(payload.userId)
-    // return { userId: payload.sub, username: payload.username }
+    console.log('validate', payload)
+    return this.userService.findById(payload.id)
   }
 }

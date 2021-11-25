@@ -5,9 +5,9 @@ import Address from './address.entity';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Expose()
-  public id?: number;
+  public id: number;
 
   @Column()
   @Expose()

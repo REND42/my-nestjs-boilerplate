@@ -1,5 +1,7 @@
 interface TokenPayload {
-  userId: number
+  id: number,
+  username: string,
+  email: string
 }
 
 export default TokenPayload

@@ -1,7 +1,7 @@
 import { Exclude, Transform } from "class-transformer";
 import Category from "../categories/categories.entity";
 import { User } from "../users/user.entity";
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 class Post {
@@ -23,6 +23,7 @@ class Post {
   // })
   public category?: string
 
+  @Index('post_authorId_index')
   @ManyToOne(() => User, (author: User) => author.posts)
   public author: User
 
